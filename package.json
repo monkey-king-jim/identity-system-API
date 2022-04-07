@@ -1,0 +1,8 @@
+{
+  "name": "identity-system-API",
+  "version": "1.0.0",
+  "description": "back-end test for array.com",
+  "main": "index.js",
+  "author": "monkey-king-jim <57361690+monkey-king-jim@users.noreply.github.com>",
+  "license": "MIT"
+}
