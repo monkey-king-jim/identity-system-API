@@ -4,5 +4,13 @@
   "description": "back-end test for array.com",
   "main": "index.js",
   "author": "monkey-king-jim <57361690+monkey-king-jim@users.noreply.github.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
+    "uuid": "^8.3.2"
+  }
 }
