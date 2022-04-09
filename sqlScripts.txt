@@ -1,6 +1,0 @@
-CREATE TABLE `testDB`.`userTable` (
-  `userID` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(100) NULL,
-  `lastLogin` DATETIME NULL,
-  PRIMARY KEY (`userID`));

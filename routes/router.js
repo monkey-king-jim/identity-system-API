@@ -1,52 +1,37 @@
 const express = require("express");
+const { body, check } = require("express-validator/check");
 const router = express.Router();
 
-const bcrypt = require("bcryptjs");
-const uuid = require("uuid");
-const jwt = require("jsonwebtoken");
+const User = require("../model/user");
 
-const db = require("../lib/db.js");
-const userMiddleware = require("../middleware/users.js");
+const authController = require("../controllers/auth");
 
 router.post(
   "/sign-up",
-  userMiddleware.validateRegister,
-  async (req, res, next) => {
-    const username = db.escape(req.body.name);
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-    db.getConnection(async (err, connection) => {
-      if (err) throw err;
-      const sqlSearch =
-        "SELECT * FROM userTable WHERE LOWER(username) = LOWER(?)";
-      const search_query = mysql.format(sqlSearch, [username]);
-
-      const sqlInsert = `INSERT INTO userTable VALUES ('${uuid.v4()}',?,?, now())`;
-      const insert_query = mysql.format(sqlInsert, [username, hashedPassword]);
-
-      await connection.query(search_query, async (err, result) => {
-        if (err) throw err;
-        console.log("------> Search Results");
-
-        if (result.length != 0) {
-          connection.release();
-          console.log("------> User already exists");
-          res.sendStatus(409);
-        } else {
-          await connection.query(insert_query, (err, result) => {
-            connection.release();
-            if (err) throw err;
-            console.log("--------> Created new User");
-            console.log(result.insertId);
-            res.sendStatus(201);
-          });
+  [
+    check("username").custom((value) => {
+      return User.findOne({ where: { username: value } }).then((user) => {
+        if (user) {
+          return Promise.reject("Username already exists!");
         }
       });
-    });
-  }
+    }),
+    body("email")
+      .isEmail()
+      .withMessage("Please enter a valid email.")
+      .custom((value, { req }) => {
+        return User.findOne({ where: { email: value } }).then((user) => {
+          if (user) {
+            return Promise.reject("E-Mail address already exists!");
+          }
+        });
+      })
+      .normalizeEmail(),
+    body("password")
+      .isLength({ min: 5 })
+      .withMessage("must be at least 5 chars long"),
+  ],
+  authController.signup
 );
-router.post("/login", (req, res, next) => {});
-// router.get("/secret-route", (req, res, next) => {
-//   res.send("This is the secret content.");
-// });
+
 module.exports = router;
