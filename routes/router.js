@@ -5,6 +5,7 @@ const router = express.Router();
 const User = require("../model/user");
 
 const authController = require("../controllers/auth");
+const isAuth = require("../_middleware/is-auth");
 
 router.post(
   "/sign-up",
@@ -33,5 +34,14 @@ router.post(
   ],
   authController.signup
 );
+
+router.post("/login", [], authController.login);
+
+router.get("/user-profile", isAuth, (req, res, next) => {
+  if (!req.username) {
+    const error = new Error();
+    error.sta;
+  }
+});
 
 module.exports = router;
