@@ -1,5 +1,6 @@
 const User = require("../model/user");
 const { validationResult } = require("express-validator");
+const { Op } = require("sequelize");
 
 const bcrypt = require("bcryptjs");
 const uuid = require("uuid");
@@ -19,6 +20,19 @@ exports.signup = async (req, res, next) => {
   const email = req.body.email;
 
   try {
+    const existedUser = await User.findOne({
+      where: {
+        [Op.or]: [{ username: username }, { email: email }],
+      },
+    });
+
+    if (existedUser) {
+      const error = new Error("User already existed");
+      error.statusCode = 401;
+      error.data = errors.array();
+      throw error;
+    }
+
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = await User.create({
       username: username,
@@ -27,7 +41,6 @@ exports.signup = async (req, res, next) => {
     });
     res.status(201).json({ message: "User Created!", user: user });
   } catch (err) {
-    console.err(err);
     next(err);
   }
 };
@@ -47,10 +60,14 @@ exports.login = (req, res, next) => {
 
   let registerUser;
 
-  User.findOne({ wehre: { email: email, username: username } })
+  User.findOne({
+    where: {
+      [Op.or]: [{ username: username }, { email: email }],
+    },
+  })
     .then((user) => {
       if (!user) {
-        const error = new Error();
+        const error = new Error("User not exist");
         error.statusCode = 404;
         throw error;
       }
@@ -61,7 +78,7 @@ exports.login = (req, res, next) => {
     })
     .then((isEqual) => {
       if (!isEqual) {
-        const error = new Error();
+        const error = new Error("Wrong password");
         error.statusCode = 401;
         throw error;
       }

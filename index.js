@@ -11,10 +11,11 @@ app.use(express.json());
 const router = require("./routes/router.js");
 app.use("/auth", router);
 
-app.use((error, req, res) => {
+app.use((error, req, res, next) => {
   const status = error.status || 500;
   const message = error.message;
   const data = error.data;
+  console.log(res);
   res.status(status).json({ message: message, data: data });
 });
 

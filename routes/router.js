@@ -10,23 +10,9 @@ const isAuth = require("../_middleware/is-auth");
 router.post(
   "/sign-up",
   [
-    check("username").custom((value) => {
-      return User.findOne({ where: { username: value } }).then((user) => {
-        if (user) {
-          return Promise.reject("Username already exists!");
-        }
-      });
-    }),
     body("email")
       .isEmail()
       .withMessage("Please enter a valid email.")
-      .custom((value, { req }) => {
-        return User.findOne({ where: { email: value } }).then((user) => {
-          if (user) {
-            return Promise.reject("E-Mail address already exists!");
-          }
-        });
-      })
       .normalizeEmail(),
     body("password")
       .isLength({ min: 5 })
@@ -36,12 +22,5 @@ router.post(
 );
 
 router.post("/login", [], authController.login);
-
-router.get("/user-profile", isAuth, (req, res, next) => {
-  if (!req.username) {
-    const error = new Error();
-    error.sta;
-  }
-});
 
 module.exports = router;

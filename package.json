@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "monkey-king-jim <57361690+monkey-king-jim@users.noreply.github.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
