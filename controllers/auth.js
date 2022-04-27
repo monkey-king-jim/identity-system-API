@@ -1,3 +1,4 @@
+require("dotenv").config("../.env");
 const User = require("../model/user");
 const { validationResult } = require("express-validator");
 const { Op } = require("sequelize");
@@ -83,12 +84,13 @@ exports.login = (req, res, next) => {
         throw error;
       }
 
+      // sign jwt
       const token = jwt.sign(
         {
           email: registerUser.email,
           username: registerUser.username,
         },
-        "jamesnodejs",
+        process.env.SECRET,
         { expiresIn: "1w" }
       );
 
