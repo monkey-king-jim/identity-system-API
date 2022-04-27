@@ -1,5 +1,8 @@
 require("dotenv").config("../.env");
 const Sequelize = require("sequelize");
+const user = require("../users/user.model");
+
+module.exports = db;
 
 const DB_HOST = process.env.DB_HOST;
 const DB_USER = process.env.DB_USER;
@@ -12,4 +15,9 @@ const sequelize = new Sequelize(DB_DATABASE, DB_USER, DB_PASSWORD, {
   host: DB_HOST,
 });
 
-module.exports = sequelize;
+// initiate model(s) and attach them to db object
+// add models here
+db.User = user(sequelize);
+
+// sync models with database
+await sequelize.sync();
