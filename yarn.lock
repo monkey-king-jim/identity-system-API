@@ -415,14 +415,6 @@
   "resolved" "https://registry.npmjs.org/express-unless/-/express-unless-1.0.0.tgz"
   "version" "1.0.0"
 
-"express-validator@^6.14.0":
-  "integrity" "sha512-ZWHJfnRgePp3FKRSKMtnZVnD1s8ZchWD+jSl7UMseGIqhweCo1Z9916/xXBbJAa6PrA3pUZfkOvIsHZG4ZtIMw=="
-  "resolved" "https://registry.npmjs.org/express-validator/-/express-validator-6.14.0.tgz"
-  "version" "6.14.0"
-  dependencies:
-    "lodash" "^4.17.21"
-    "validator" "^13.7.0"
-
 "express@^4.17.3":
   "integrity" "sha512-yuSQpz5I+Ch7gFrPCk4/c+dIBKlQUxtgwqzph132bsT6qhuzss6I8cLJQz7B3rFblzd6wtcI0ZbGltH/C4LjUg=="
   "resolved" "https://registry.npmjs.org/express/-/express-4.17.3.tgz"
