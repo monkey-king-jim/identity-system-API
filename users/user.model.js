@@ -1,4 +1,3 @@
-const sequelize = require("../_helpers/db");
 const Sequelize = require("sequelize");
 
 module.exports = model;
