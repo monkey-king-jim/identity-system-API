@@ -1,5 +1,5 @@
 require("dotenv").config("../.env");
-const jwt = require("express-jwt");
+const { expressjwt: jwt } = require("express-jwt");
 const SECRET = process.env.SECRET;
 
 module.exports = isAuth;
@@ -7,7 +7,7 @@ module.exports = isAuth;
 function isAuth() {
   return [
     // auth jwt token
-    jwt({ SECRET, algorithms: ["HS256"] }),
+    jwt({ secret: SECRET, algorithms: ["HS256"] }),
 
     async (req, res, next) => {
       // user ID contained in subject property in token
