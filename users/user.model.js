@@ -26,5 +26,5 @@ function model(sequelize) {
       withPassword: { attributes: {} },
     },
   };
-  return sequelize.define("user", attributes, options);
+  return sequelize.define("User", attributes, options);
 }
