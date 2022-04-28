@@ -1,6 +1,7 @@
 require("dotenv").config("../.env");
 const { init } = require("express/lib/application");
 const Sequelize = require("sequelize");
+const { Op } = require("sequelize");
 const user = require("../users/user.model");
 
 module.exports = db = {};

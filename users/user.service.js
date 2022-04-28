@@ -2,6 +2,7 @@ require("dotenv").config("../.env");
 const bcrypt = require("bcryptjs/dist/bcrypt");
 const jwt = require("jsonwebtoken");
 const db = require("_helpers/db");
+const { Op } = require("sequelize");
 
 // export service objects with encapsulated interaction with user model
 module.exports = {
@@ -13,10 +14,11 @@ module.exports = {
   login,
 };
 
-async function login({ userLoginInfo, password }) {
+async function login({ loginInfo, password }) {
+  // console.log(userLoginInfo);
   const user = await db.User.scope("withPassword").findOne({
     where: {
-      [Op.or]: [{ username: userLoginInfo }, { email: userLoginInfo }],
+      [Op.or]: [{ username: loginInfo }, { email: loginInfo }],
     },
   });
 
@@ -53,7 +55,7 @@ async function create(params) {
 
   // hash password
   if (params.password) {
-    params.hash = await bcrypt.hash(params.password, 10);
+    params.password = await bcrypt.hash(params.password, 10);
   }
 
   // sign up user
