@@ -1,16 +1,31 @@
 const sequelize = require("../_helpers/db");
 const Sequelize = require("sequelize");
 
-const User = sequelize.define("user", {
-  id: {
-    type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV4,
-    allowNull: false,
-    primaryKey: true,
-  },
-  username: { type: Sequelize.DataTypes.STRING, allowNull: false },
-  email: { type: Sequelize.DataTypes.STRING, allowNull: false },
-  password: { type: Sequelize.DataTypes.STRING, allowNull: false },
-});
+module.exports = model;
 
-module.exports = User;
+function model(sequelize) {
+  const attributes = {
+    id: {
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
+      allowNull: false,
+      primaryKey: true,
+    },
+    username: { type: Sequelize.DataTypes.STRING, allowNull: false },
+    email: { type: Sequelize.DataTypes.STRING, allowNull: false },
+    password: { type: Sequelize.DataTypes.STRING, allowNull: false },
+  };
+
+  const options = {
+    defaultScope: {
+      // not include hashed password
+      attributes: { exclude: ["password"] },
+    },
+    // other scope(s)
+    scopes: {
+      // include password
+      withPassword: { attributes: {} },
+    },
+  };
+  return sequelize.define("user", attributes, options);
+}
