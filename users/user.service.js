@@ -10,10 +10,10 @@ module.exports = {
   create,
   update,
   delete: _delete,
-  authenticate,
+  login,
 };
 
-async function authenticate({ userLoginInfo, password }) {
+async function login({ userLoginInfo, password }) {
   const user = await db.User.scope("withPassword").findOne({
     where: {
       [Op.or]: [{ username: userLoginInfo }, { email: userLoginInfo }],
