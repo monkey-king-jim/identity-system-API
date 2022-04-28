@@ -59,3 +59,43 @@ async function create(params) {
   // sign up user
   await db.User.create(params);
 }
+
+async function update(id, params) {
+  const user = await getUser(id);
+
+  // validate
+  const usernameChanged = params.username && user.username !== params.username;
+  if (
+    usernameChanged &&
+    (await db.User.findOne({ where: { username: params.username } }))
+  ) {
+    throw 'Username "' + params.username + '" is already taken';
+  }
+
+  // hash password if updated
+  if (params.password) {
+    params.hash = await bcrypt.hash(params.password, 10);
+  }
+
+  // copy params to user and save
+  Object.assign(user, params);
+  await user.save();
+
+  return omitPassword(user.get());
+}
+
+async function _delete(id) {
+  const user = await getUser(id);
+  await user.destroy();
+}
+
+async function getUser(id) {
+  const user = await db.User.findByPk(id);
+  if (!user) throw "User not found";
+  return user;
+}
+
+function omitPassword(user) {
+  const { password, ...userWithoutPassword } = user;
+  return userWithoutPassword;
+}
