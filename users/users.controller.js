@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const authorize = require("_middleware/is-auth");
+const isAuth = require("_middleware/is-auth");
 const userService = require("./user.service");
 const Joi = require("joi");
 const validateRequest = require("_middleware/validate-req");

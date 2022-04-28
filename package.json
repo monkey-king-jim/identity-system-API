@@ -2,20 +2,22 @@
   "name": "identity-system-API",
   "version": "1.0.0",
   "description": "back-end test for array.com",
-  "main": "index.js",
+  "main": "server.js",
   "author": "monkey-king-jim <57361690+monkey-king-jim@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "express-jwt": "^7.5.2",
+    "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
+    "rootpath": "^0.1.2",
     "sequelize": "^6.18.0",
     "uuid": "^8.3.2"
   },
