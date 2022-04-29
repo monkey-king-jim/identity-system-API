@@ -26,13 +26,9 @@ async function login({ loginInfo, password }) {
     throw "User login info or password is incorrect";
 
   // authentication succeed
-  const token = jwt.sign(
-    { subject: user.id, message: "foo" },
-    process.env.SECRET,
-    {
-      expiresIn: "1w",
-    }
-  );
+  const token = jwt.sign({ subject: user.id }, process.env.SECRET, {
+    expiresIn: "1w",
+  });
   return { ...omitPassword(user.get()), token };
 }
 

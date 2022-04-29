@@ -58,6 +58,7 @@ function getCurrent(req, res, next) {
 }
 
 function getById(req, res, next) {
+  console.log("Hi");
   userService
     .getById(req.params.id)
     .then((user) => res.json(user))

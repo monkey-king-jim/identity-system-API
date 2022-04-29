@@ -11,7 +11,7 @@ function isAuth() {
 
     async (req, res, next) => {
       // user ID contained in subject property in token
-      const user = await db.User.findByPk(req.user.subject);
+      const user = await db.User.findByPk(req.auth.subject);
 
       if (!user) return res.status(401).json({ message: "Unauthorzied User!" });
 
