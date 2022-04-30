@@ -13,6 +13,19 @@ function model(sequelize) {
     username: { type: Sequelize.DataTypes.STRING, allowNull: false },
     email: { type: Sequelize.DataTypes.STRING, allowNull: false },
     password: { type: Sequelize.DataTypes.STRING, allowNull: false },
+    firstName: { type: Sequelize.DataTypes.STRING, allowNull: false },
+    lastName: { type: Sequelize.DataTypes.STRING, allowNull: false },
+    role: { type: Sequelize.DataTypes.STRING, allowNull: false },
+    verificationToken: { type: Sequelize.DataTypes.STRING },
+    verified: { type: Sequelize.DataTypes.DATE },
+    resetToken: { type: Sequelize.DataTypes.STRING },
+    resetTokenExpires: { type: Sequelize.DataTypes.DATE },
+    isVerified: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        return !!this.verified;
+      },
+    },
   };
 
   const options = {
