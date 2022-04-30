@@ -3,6 +3,7 @@ const { init } = require("express/lib/application");
 const Sequelize = require("sequelize");
 const { Op } = require("sequelize");
 const user = require("../users/user.model");
+const refreshToken = require("../users/refresh-token.model");
 
 module.exports = db = {};
 
@@ -23,6 +24,11 @@ async function initiate_db() {
   // initiate model(s) and attach them to db object
   // add models here
   db.User = user(sequelize);
+  db.RefreshToken = refreshToken(sequelize);
+
+  // relationships
+  db.User.hasMany(db.RefreshToken, { onDelete: "CASCADE" }); // delete child rows when deleting corresponding parent record
+  db.RefreshToken.belongsTo(bd.User);
 
   // sync models with database
   await sequelize.sync();
