@@ -6,7 +6,7 @@
   "author": "monkey-king-jim <57361690+monkey-king-jim@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon 。/server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
