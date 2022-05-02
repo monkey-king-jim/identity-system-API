@@ -14,7 +14,7 @@ function model(sequelize) {
     revoked: { type: DataTypes.DATE },
     replacedByToken: { type: DataTypes.STRING },
     isExpired: {
-      type: DataTypes.VIRTUAL,
+      type: DataTypes.VIRTUAL, // VIRTUAL properties are available on the sequalzie model but will not persist to database
       get() {
         return Date.now() >= this.expires;
       },
