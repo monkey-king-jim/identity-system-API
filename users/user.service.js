@@ -19,7 +19,6 @@ module.exports = {
 };
 
 async function login({ loginInfo, password }) {
-  // console.log(userLoginInfo);
   const user = await db.User.scope("withPassword").findOne({
     where: {
       [Op.or]: [{ username: loginInfo }, { email: loginInfo }],
@@ -31,7 +30,7 @@ async function login({ loginInfo, password }) {
 
   // authentication succeed
   const token = generateJwtToken(user);
-  const refreshToken = generateRefreshToken(user);
+  const refreshToken = await generateRefreshToken(user);
 
   return {
     ...omitPassword(user.get()),
