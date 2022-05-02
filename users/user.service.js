@@ -84,7 +84,7 @@ async function create(params) {
   }
 
   // sign up user
-  const user = await db.User.create(params);
+  const user = await db.User.build(params);
 
   // assign admin role only to the 1st user
   user.role = (await db.User.count()) === 0 ? Role.Admin : Role.User;
@@ -146,7 +146,7 @@ async function generateRefreshToken(user) {
   // create a refresh token that expires in a week
   return await db.RefreshToken.create({
     userId: user.id,
-    token: crypto.randomBytes(40).toString("hex"), // create a random string
+    token: randomTokenString(), // create a random string
     expires: new Date(Date.now() + 7 * 60 * 60 * 24 * 1000),
   });
 }
@@ -161,4 +161,8 @@ function generateJwtToken(user) {
   return jwt.sign({ subject: user.id }, process.env.SECRET, {
     expiresIn: "15m",
   });
+}
+
+function randomTokenString() {
+  return crypto.randomBytes(40).toString("hex");
 }
