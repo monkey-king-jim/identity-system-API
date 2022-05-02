@@ -28,7 +28,7 @@ async function initiate_db() {
 
   // relationships
   db.User.hasMany(db.RefreshToken, { onDelete: "CASCADE" }); // delete child rows when deleting corresponding parent record
-  db.RefreshToken.belongsTo(bd.User);
+  db.RefreshToken.belongsTo(db.User);
 
   // sync models with database
   await sequelize.sync();
