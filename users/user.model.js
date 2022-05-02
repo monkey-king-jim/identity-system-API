@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const { DataTypes } = require("sequelize");
 
 module.exports = model;
 
@@ -10,16 +11,16 @@ function model(sequelize) {
       allowNull: false,
       primaryKey: true,
     },
-    username: { type: Sequelize.DataTypes.STRING, allowNull: false },
-    email: { type: Sequelize.DataTypes.STRING, allowNull: false },
-    password: { type: Sequelize.DataTypes.STRING, allowNull: false },
-    firstName: { type: Sequelize.DataTypes.STRING, allowNull: false },
-    lastName: { type: Sequelize.DataTypes.STRING, allowNull: false },
-    role: { type: Sequelize.DataTypes.STRING, allowNull: false },
-    verificationToken: { type: Sequelize.DataTypes.STRING },
-    verified: { type: Sequelize.DataTypes.DATE },
-    resetToken: { type: Sequelize.DataTypes.STRING },
-    resetTokenExpires: { type: Sequelize.DataTypes.DATE },
+    username: { type: DataTypes.STRING, allowNull: false },
+    email: { type: DataTypes.STRING, allowNull: false },
+    password: { type: DataTypes.STRING, allowNull: false },
+    firstName: { type: DataTypes.STRING, allowNull: false },
+    lastName: { type: DataTypes.STRING, allowNull: false },
+    role: { type: DataTypes.STRING, allowNull: false },
+    verificationToken: { type: DataTypes.STRING },
+    verified: { type: DataTypes.DATE },
+    resetToken: { type: DataTypes.STRING },
+    resetTokenExpires: { type: DataTypes.DATE },
     isVerified: {
       type: DataTypes.VIRTUAL,
       get() {
