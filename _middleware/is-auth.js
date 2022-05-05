@@ -17,7 +17,6 @@ function isAuth(roles = []) {
     async (req, res, next) => {
       // user ID contained in subject property in token
       const user = await db.User.findByPk(req.auth.subject);
-      console.log(req.auth);
 
       if (!user || (roles.length && !roles.includes(user.role)))
         return res.status(401).json({ message: "Unauthorzied User!" });
