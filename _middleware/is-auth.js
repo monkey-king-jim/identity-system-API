@@ -1,30 +1,29 @@
 require("dotenv").config("../.env");
-const jwt = require("jsonwebtoken");
+const { expressjwt: jwt } = require("express-jwt");
+const SECRET = process.env.SECRET;
 
-module.exports = async (req, res, next) => {
-  const authHeader = req.get("Authorization");
-  if (!authHeader) {
-    const error = new Error();
-    error.statusCode = 401;
-    throw error;
-  }
+module.exports = isAuth;
 
-  // get the payload from jwt
-  const token = authHeader.split(" ")[1];
-  let verifiedToken;
-  try {
-    verifiedToken = await jwt.verify(token, process.env.SECRET);
-  } catch (err) {
-    err.statusCode = 500;
-    throw err;
-  }
+function isAuth(roles = []) {
+  // param can be a string or array
+  // e.g. 'User'/ Role.User/ [Role.Admin, Role.User]
 
-  if (!verifiedToken) {
-    const error = new Error();
-    error.statusCode = 401;
-    throw error;
-  }
+  if (typeof roles === "string") roles = [roles];
 
-  req.username = verifiedToken.username;
-  next();
-};
+  return [
+    // auth jwt token & attach payload to req.auth
+    jwt({ secret: SECRET, algorithms: ["HS256"] }),
+
+    async (req, res, next) => {
+      // user ID contained in subject property in token
+      const user = await db.User.findByPk(req.auth.subject);
+
+      if (!user || (roles.length && !roles.includes(user.role)))
+        return res.status(401).json({ message: "Unauthorzied User!" });
+
+      // auth succeed and attach user instance got by ID to req.auth
+      req.auth.role = user.role;
+      next();
+    },
+  ];
+}
