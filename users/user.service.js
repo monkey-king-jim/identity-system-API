@@ -42,10 +42,9 @@ async function login({ loginInfo, password }) {
 async function refreshToken(token) {
   const refreshToken = await getRefreshToken(token);
   const user = await refreshToken.getUser();
-  // console.log(refreshToken);
 
   // replace old refresh token with a new one and save
-  const newRefreshToken = generateRefreshToken(user);
+  const newRefreshToken = await generateRefreshToken(user);
   refreshToken.revoked = Date.now();
   refreshToken.replacedByToken = newRefreshToken.token;
   await refreshToken.save();
