@@ -6,7 +6,7 @@ module.exports = model;
 function model(sequelize) {
   const attributes = {
     id: {
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       defaultValue: Sequelize.UUIDV4,
       allowNull: false,
       primaryKey: true,

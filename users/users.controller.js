@@ -100,7 +100,7 @@ function getAll(req, res, next) {
 }
 
 function getCurrent(req, res, next) {
-  res.json(req.user);
+  res.json(req.auth);
 }
 
 function getById(req, res, next) {

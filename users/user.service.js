@@ -42,6 +42,7 @@ async function login({ loginInfo, password }) {
 async function refreshToken(token) {
   const refreshToken = await getRefreshToken(token);
   const user = await refreshToken.getUser();
+  // console.log(refreshToken);
 
   // replace old refresh token with a new one and save
   const newRefreshToken = generateRefreshToken(user);
@@ -143,8 +144,7 @@ function omitPassword(user) {
 
 async function generateRefreshToken(user) {
   // create a refresh token that expires in a week
-  return await db.RefreshToken.create({
-    userId: user.id,
+  return await user.createRefreshToken({
     token: randomTokenString(), // create a random string
     expires: new Date(Date.now() + 7 * 60 * 60 * 24 * 1000),
   });
