@@ -62,7 +62,7 @@ function revokeToken(req, res, next) {
   if (!token) return res.status(400).json({ message: "Token not found" });
 
   // users can revoke their own tokens and admins can revoke any tokens
-  if (!req.user.ownsToken(token) && req.user.role !== Role.Admin) {
+  if (!req.auth.ownsToken(token) && req.auth.role !== Role.Admin) {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
