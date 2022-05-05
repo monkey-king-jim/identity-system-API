@@ -23,6 +23,9 @@ function isAuth(roles = []) {
 
       // auth succeed and attach user instance got by ID to req.auth
       req.auth.role = user.role;
+      const refreshTokens = await user.getRefreshTokens();
+      req.auth.ownsToken = (token) =>
+        !!refreshTokens.find((x) => x.token === token);
       next();
     },
   ];
