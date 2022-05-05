@@ -124,7 +124,7 @@ function updateSchema(req, res, next) {
     lastName: Joi.string().empty(""),
   });
 
-  if (req.user.role === Role.Admin) {
+  if (req.auth.role === Role.Admin) {
     schemaRules.role = Joi.string().valid(Role.Admin, Role.User).empty("");
   }
 
