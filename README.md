@@ -23,3 +23,16 @@ More TODO applications:
 * SSO
 * Login/Signup frontend
 
+## How to use
+
+### Dependencies
+
+```
+npm install
+```
+
+### Configuration
+
+Copy the default `.env.default` to `.env` and modify as needed.
+
+```
