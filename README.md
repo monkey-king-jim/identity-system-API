@@ -36,3 +36,18 @@ npm install
 Copy the default `.env.default` to `.env` and modify as needed.
 
 ```
+## REQUIRED
+DB_HOST = foo
+
+## OPTIONAL
+# Database User Info
+DB_PASSWORD=12345678
+DB_USER=newuser
+# isten port of the bot
+PORT=3000
+```
+
+### API's available
+
+### Authentication
+
