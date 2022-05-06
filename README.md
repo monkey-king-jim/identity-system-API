@@ -112,4 +112,4 @@ An authorization middleware was used to restrict the access of the route to only
 
 ### How to securely persist the registered users
 
-Bcrypt was used to hash the password with unique salt at runtime and store the hashed password in the database. 
+[Bcrypt](https://en.wikipedia.org/wiki/Bcrypt) was used to hash the password with unique salt at runtime and store the hashed password in the database. 
