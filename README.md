@@ -94,6 +94,34 @@ Failed validation, in case login or password was incorrect:
 }
 ```
 
+#### Sign up
+  Register a user with his user information. The first registered user will be assign Admin role.
+  
+  POST /users/sign-up
+  
+Request body:
+```json
+{
+    "username": "foo",
+    "email": "foobar@email.com",
+    "password": "12345678",
+    "confirmPassword": "12345678",
+    "firstName": "foo",
+    "lastName": "bar",
+    "acceptTerms": true
+}
+```
+Successful register response:
+```json
+{ message: "Sign up successfully" }
+```
+
+Error will be threw if:
+
+1. username or email already exists in the database
+2. sign up schema does not meet
+
+
 ## Implementation Details
 
 ### How to keep users login
