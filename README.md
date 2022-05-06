@@ -49,5 +49,16 @@ PORT=3000
 
 ### API's available
 
-### Authentication
-
+#### Login
+  Log in a user by his username or Email as the login info and his password.
+  
+  POST /users/login
+  
+Request body:
+```json
+{
+  "loginInfo": "foobar",
+  "password": "password"
+}
+```
+Successful validation response:
