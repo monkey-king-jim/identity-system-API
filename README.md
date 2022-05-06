@@ -62,3 +62,21 @@ Request body:
 }
 ```
 Successful validation response:
+```json
+{
+    "isVerified": false,
+    "id": "8cb51257-fe30-451c-b033-1f718e44a531",
+    "username": "foobar",
+    "email": "foobar@email.com",
+    "firstName": "foo",
+    "lastName": "bar",
+    "role": "Admin",
+    "verificationToken": "7b9d22b60a97349ede97dfaa8af127b9fa6cf9e25fc8a82b73dad2469d38857ea83b4703212b28e0",
+    "verified": null,
+    "resetToken": null,
+    "resetTokenExpires": null,
+    "createdAt": "2022-05-05T15:21:48.000Z",
+    "updatedAt": "2022-05-05T15:21:48.000Z",
+    "token":    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoiOGNiNTEyNTctZmUzMC00NTFjLWIwMzMtMWY3MThlNDRhNTMxIiwiaWF0IjoxNjUxNzg2Mjc0LCJleHAiOjE2NTE3ODcxNzR9.-P6w6CaLnROtaKoq4T46Ca7msB_a0q4cbR_uPp2H-LE"
+}
+```
