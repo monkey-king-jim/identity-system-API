@@ -94,8 +94,7 @@ Failed validation, in case login or password was incorrect:
 }
 ```
 
-
-
+---
 #### Sign up
   Register a user with his user information. The first registered user will be assign Admin role.
   
