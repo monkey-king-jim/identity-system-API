@@ -121,6 +121,41 @@ Error will be threw if:
 1. username or email already exists in the database
 2. sign up schema does not meet
 
+#### Refresh token
+  Replace an old refresh token stored in cookies with a new one, the refresh token is used for generating new JWT access tokens when (or just before) they expire.
+  
+  POST /users/refresh-token
+  
+Request body:
+```json
+{
+}
+```
+
+#### Revoke token
+  Revoke a token stored in cookie by user, or revoke a specified token in the req body by admin only.
+  
+  POST /users/revoke-token
+  
+Request body (optional):
+```json
+{
+  "token": "7b9d22b60a97349ede97dfaa8af127b9fa6cf9e25fc8a82b73dad2469d38857ea83b4703212b28e0"
+}
+```
+Successful response:
+```json
+{
+    message: "Token successfully revoked" 
+}
+```
+
+Error will be threw if:
+
+1. revoke token schema does not meet
+2. token not found
+3. non-admin user trys to revoke a token other than his own
+
 
 ## Implementation Details
 
