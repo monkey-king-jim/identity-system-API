@@ -54,7 +54,7 @@ npm start
 ```
 
 ### API's available
-
+---
 #### Login
   Log in a user by his username or Email as the login info and his password.
   
@@ -121,7 +121,7 @@ Error will be threw if:
 
 1. username or email already exists in the database
 2. sign up schema does not meet
-
+---
 #### Refresh token
   Replace an old refresh token stored in cookies with a new one, the refresh token is used for generating new JWT access tokens when (or just before) they expire.
   
@@ -132,7 +132,7 @@ Request body:
 {
 }
 ```
-
+---
 #### Revoke token
   Revoke a token stored in cookie by user, or revoke a specified token in the req body by admin only.
   
