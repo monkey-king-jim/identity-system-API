@@ -93,6 +93,7 @@ Failed validation, in case login or password was incorrect:
     "message": "User login info or password is incorrect"
 }
 ```
+--
 
 #### Sign up
   Register a user with his user information. The first registered user will be assign Admin role.
