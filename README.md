@@ -55,7 +55,7 @@ npm start
 
 ### API's available
 
-#### Login
+#### * Login
   Log in a user by his username or Email as the login info and his password.
   
   POST /users/login
